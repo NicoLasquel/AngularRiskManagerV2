@@ -1,0 +1,58 @@
+<mat-card>
+    <div class="matCardTitleButton">
+        <mat-card-title>Mes Projets</mat-card-title>
+        <mat-card-title>
+            <button mat-raised-button
+                    routerLink = '/new-project'
+                    color="primary">
+                    <mat-icon>add</mat-icon>
+                    Nouveau
+                </button>
+        </mat-card-title>
+    </div>
+
+    <app-component-loading
+    [loading]="isLoaded"
+    [httploading]="ishttpLoaded"></app-component-loading>
+
+    <mat-card *ngFor="let project of projects" class="project-card">
+        <mat-card-title>{{project.project_name | uppercase}}</mat-card-title>
+        <mat-card-content>
+            <div>Type: {{projectType(project)}}</div>
+            <div>Modifié par: {{project.project_who}}</div>
+            <div>Le: {{project.project_when}} </div> 
+        </mat-card-content>
+        <mat-card-actions align="end">
+            <button mat-raised-button
+            color="primary"
+            [class.selected]="project === selectedProject"
+            (click)="onSelect(project);projectType(project)"
+            routerLink="/{{project.project_last}}/{{project.id}}">
+                <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-raised-button color="primary">
+                <mat-icon>share</mat-icon>
+            </button>
+            <button mat-raised-button
+            color= warn
+            (click)="removeProjectDialog(project)"> <!--(click)=delete(project)-->
+                <mat-icon>delete</mat-icon>
+            </button>
+        </mat-card-actions>
+    </mat-card>
+    <!--
+    <mat-card-actions align="end">
+        <div>
+            <button mat-raised-button
+                routerLink = '/new-project'
+                color="primary">
+                Add Project 
+            </button>
+        </div>
+    </mat-card-actions>-->
+</mat-card>
+
+<!--<app-create-project projects="projects"></app-create-project>-->
+
+
+    

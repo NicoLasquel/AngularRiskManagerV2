@@ -1,0 +1,14 @@
+<form>
+    <mat-form-field float-label="auto" appearance="outline">
+        <mat-label>{{title}}</mat-label>
+        <input 
+            type="text"   
+            matInput
+            [formControl]="myControl"
+            [disableControl]=!isEditable
+            (change)=entryEdit(myControl.value)>
+            <!--
+        matInput disabled={{!isEditable}}
+        [(ngModel)] ='project.project_name'> -->
+    </mat-form-field>
+</form>

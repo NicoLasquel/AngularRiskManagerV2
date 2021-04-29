@@ -1,0 +1,137 @@
+<mat-card>
+    <div class="matCardTitleButton">
+        <mat-card-title>
+            Atelier 1.1 - Cadrage de l'étude
+        </mat-card-title>
+        <mat-card-title>
+            <button mat-raised-button
+            color="primary"
+            class="side-button">
+                <mat-icon>
+                    import_export
+                </mat-icon>
+            </button>
+        </mat-card-title>
+    </div>
+    <app-component-loading [loading]="isLoaded" [httploading]="ishttpLoaded"></app-component-loading>
+    <mat-card-content *ngIf="!ishttpLoaded">
+        <mat-accordion multi=true>
+            <!--Expansion Panel 1-->
+            <app-ebiosrm-objectif [Atelier]=1></app-ebiosrm-objectif>
+            <!--Expansion Panel 2-->
+            <mat-expansion-panel [expanded]="true">
+                <mat-expansion-panel-header>
+                    <b>Cadrage</b> <!--Titre-->
+                </mat-expansion-panel-header>
+                <!--Nom projet-->
+                <app-field-input [isEditable]="isEditable" [title]=titleList[0] [(myString)]="myproject.project_name"></app-field-input>
+                    <br>
+                <!--Description de l'objectif-->
+                <app-field-text [isEditable]="isEditable" [title]=titleList[1] [(myString)]="myframe.frame_detail"></app-field-text>
+                <br>
+                <!--Commentaire-->
+                <app-field-text [isEditable]="isEditable" [title]=titleList[2] [(myString)]="myframe.frame_moredetail"></app-field-text>
+                <br>
+                <!--Titre-->
+                <mat-panel-title><u>Cadre temporel</u></mat-panel-title>
+                <br>
+                <!--Date atelier 1-->
+                <app-field-daterange  [isEditable]="isEditable" [title]=titleList[4] [(startDate)]="myframe.frame_timeAt1_start" [(endDate)]="myframe.frame_timeAt1_end"></app-field-daterange>                
+                    <!--Date atelier 2-->
+                <app-field-daterange  [isEditable]="isEditable" [title]=titleList[5] [(startDate)]="myframe.frame_timeAt2_start" [(endDate)]="myframe.frame_timeAt2_end"></app-field-daterange>
+                <!--Date atelier 3-->
+                <app-field-daterange  [isEditable]="isEditable" [title]=titleList[6] [(startDate)]="myframe.frame_timeAt3_start" [(endDate)]="myframe.frame_timeAt3_end"></app-field-daterange>
+                <!--Date atelier 4-->
+                <app-field-daterange  [isEditable]="isEditable" [title]=titleList[7] [(startDate)]="myframe.frame_timeAt4_start" [(endDate)]="myframe.frame_timeAt4_end"></app-field-daterange>
+                <!--Date atelier 5-->
+                <app-field-daterange  [isEditable]="isEditable" [title]=titleList[8] [(startDate)]="myframe.frame_timeAt5_start" [(endDate)]="myframe.frame_timeAt5_end"></app-field-daterange>
+                
+                <mat-panel-title>
+                    <u>Durée des cycles stratégiques et opérationnels</u>
+                </mat-panel-title>
+                <br>
+                <!--Date Stratégique-->
+                <app-field-daterange  [isEditable]="isEditable" [title]=titleList[9] [(startDate)]="myframe.frame_timeStrat_start" [(endDate)]="myframe.frame_timeStrat_end"></app-field-daterange>
+                <!--Date Opérationnel-->
+                <app-field-daterange  [isEditable]="isEditable" [title]=titleList[10] [(startDate)]="myframe.frame_timeOp_start" [(endDate)]="myframe.frame_timeOp_end"></app-field-daterange>
+                <!--Commentaire2-->
+                <app-field-text [isEditable]="isEditable" [title]=titleList[2] [(myString)]="myframe.frame_timedetail"></app-field-text>
+                <br>
+                
+                <mat-panel-title>
+                    <u>Personne responsable d'accepter les risques résiduels aux termes de l'étude</u>
+                </mat-panel-title>
+                <br>
+                <!--Responsable + auto-Liste-->
+                <app-field-autocomplete [title]="titleList[3]" [isEditable]="isEditable" [options]="optionList" [(Entry)]="myframe.frame_responsable"></app-field-autocomplete>
+
+                <!--Edit button-->
+                <mat-card-actions align="end">
+                    <div *ngIf=!isEditable>
+                        <button mat-raised-button
+                        color="primary"
+                        (click)="isEditable=true;">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                    </div>
+                    <!--Save button-->
+                    <div *ngIf=isEditable>
+                        <button mat-raised-button
+                        class="side-button"
+                        color="primary"
+                        (click)="saveProject(); saveFrame(); isEditable=false;">
+                            <mat-icon>save</mat-icon>  
+                        </button>
+                        <!--Cancel button-->
+                        <button mat-raised-button
+                        class="side-button"
+                        color="warn"
+                        (click)="isEditable=false;">
+                            <mat-icon>cancel</mat-icon>  
+                        </button>
+                    </div>
+                </mat-card-actions>
+
+            </mat-expansion-panel>
+            <!--Expansion Panel 3-->
+            <mat-expansion-panel [expanded]="true">
+                <mat-expansion-panel-header>
+                    <b>Acteurs</b>
+                </mat-expansion-panel-header>
+                <mat-panel-title>
+                    title
+                </mat-panel-title>
+                <mat-panel-description>
+                    Description
+                </mat-panel-description>
+            </mat-expansion-panel>
+            <!--Expansion Panel 4-->
+            <mat-expansion-panel [expanded]="true">
+                <mat-expansion-panel-header>
+                    <b>RACI</b>
+                </mat-expansion-panel-header>
+                <mat-panel-title>
+                    title
+                </mat-panel-title>
+                <mat-panel-description>
+                    Description
+                </mat-panel-description>
+            </mat-expansion-panel>
+            
+        </mat-accordion>
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+        <button mat-raised-button
+            color="primary"
+            class="side-button"
+            (click)="goBack()"> 
+            Retour
+        </button>
+        <div fxFlex></div>
+        <button mat-raised-button color="primary"> 
+            Suite
+        </button>
+    </mat-card-actions>
+
+</mat-card>

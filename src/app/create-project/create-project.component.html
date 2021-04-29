@@ -1,0 +1,111 @@
+<mat-card>
+    <div class="matCardTitleButton">
+        <mat-card-title>Nouveau Projet</mat-card-title>
+        <mat-card-title>
+            <!-- (click) passes input value to add() and then clears the input -->
+            <button mat-raised-button
+                [disabled]="!TypeSelected"
+                (click)="add(projectName);
+                projectName='';
+                TypeSelected='';
+                intSelectReset();"
+                routerLink = '{{newUrl}}'
+                color="primary">
+                <mat-icon>add</mat-icon>
+                Créer
+            </button>
+        </mat-card-title>
+    </div>
+
+    <div>
+        <!--Nom du projet-->
+        <app-field-input  [isEditable]=true [title]=titleString[0] [(myString)]="projectName"></app-field-input>
+        <br>
+    </div>
+    <div>
+        <div>
+            Type de projet :
+        </div>
+        <div>
+            <mat-radio-group
+            aria-label="Type de projet"
+            color="primary"
+            [(ngModel)]="TypeSelected"
+            (change)=intSelectReset()>
+                <mat-radio-button *ngFor="let cT of createType" disableRipple value="{{cT}}"> {{cT}} </mat-radio-button>
+            </mat-radio-group>
+        </div>
+        <br>
+        <div *ngIf="TypeSelected == 'EBIOS-RM'">
+            <!--you selected {{TypeSelected}}-->
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                <!-- Checkbox Column -->
+                <mat-radio-group aria-label="Type de EBIOS-RM" color="primary" [(ngModel)]="intTypeSelected">
+                    <ng-container matColumnDef="select">
+                        <th mat-header-cell *matHeaderCellDef></th>
+        
+                        <td mat-cell *matCellDef="let element">
+                            <mat-radio-button disableRipple value="{{element.position}}"></mat-radio-button>
+                        </td>
+                    </ng-container>
+                </mat-radio-group>
+                <!-- Detail Column -->
+                <ng-container matColumnDef="detail">
+                  <th mat-header-cell *matHeaderCellDef> Objectif de l'étude </th>
+                  <td mat-cell *matCellDef="let element"> {{element.detail}} </td>
+                </ng-container>
+
+                <!-- At1 Column -->
+                <ng-container matColumnDef="At1">
+                    <th mat-header-cell *matHeaderCellDef> Atelier 1 </th>
+                    <td mat-cell *matCellDef="let element" class="CrossElement"> {{element.At1}} </td>
+                </ng-container>
+                
+                <!-- At2 Column -->
+                <ng-container matColumnDef="At2">
+                    <th mat-header-cell *matHeaderCellDef> Atelier 2 </th>
+                    <td mat-cell *matCellDef="let element" class="CrossElement"> {{element.At2}} </td>
+                </ng-container>
+
+                <!-- At3 Column -->
+                <ng-container matColumnDef="At3">
+                    <th mat-header-cell *matHeaderCellDef> Atelier 3 </th>
+                    <td mat-cell *matCellDef="let element" class="CrossElement"> {{element.At3}} </td>
+                </ng-container>
+                
+                <!-- At4 Column -->
+                <ng-container matColumnDef="At4">
+                    <th mat-header-cell *matHeaderCellDef> Atelier 4 </th>
+                    <td mat-cell *matCellDef="let element" class="CrossElement"> {{element.At4}} </td>
+                </ng-container>
+                
+                <!-- At5 Column -->
+                <ng-container matColumnDef="At5">
+                    <th mat-header-cell *matHeaderCellDef> Atelier 5 </th>
+                    <td mat-cell *matCellDef="let element" class="CrossElement"> {{element.At5}} </td>
+                </ng-container>
+              
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+                    (click)="selection.toggle(row)">
+                </tr>
+            </table>
+        </div>
+
+        <br>
+
+        <div *ngIf="TypeSelected == 'ISP'" >
+            you selected {{TypeSelected}}
+            value is: {{TypeConvertor()}}
+            <div>This portion is not ready</div>
+        </div>
+
+        <div *ngIf="TypeSelected == 'EBIOS'">
+            you selected {{TypeSelected}}
+            value is: {{TypeConvertor()}}
+            <div>This portion is not ready</div>
+        </div>
+    </div>
+    
+</mat-card>

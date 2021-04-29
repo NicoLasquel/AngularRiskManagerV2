@@ -1,0 +1,11 @@
+<form>
+    <mat-form-field class="text-detail" appearance="outline">
+        <mat-label>{{title}}</mat-label>
+        <textarea
+            type="text"   
+            matInput
+            [formControl]="myControl"
+            [disableControl]=!isEditable
+            (change)=entryEdit(myControl.value)> </textarea>
+    </mat-form-field>
+</form>

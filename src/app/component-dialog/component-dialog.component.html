@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>{{data.title}}</h2>
+<h3 mat-dialog-subtitle>
+<mat-dialog-content>
+    {{data.message}}
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-raised-button
+    mat-dialog-close
+    (click) = "onDismiss()"
+    mat-dialog-close="true"
+    color="primary">
+        <mat-icon>{{data.button1}}</mat-icon>
+    </button>
+    <button mat-raised-button
+     mat-dialog-close
+     (click) = "onConfirm()"
+     mat-dialog-close="false"
+     color="warn">
+        <mat-icon>{{data.button2}}</mat-icon>
+    </button>
+</mat-dialog-actions>

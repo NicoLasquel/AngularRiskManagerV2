@@ -1,0 +1,7 @@
+<app-navigation-bar [title]="title" [subLinks]="subLinks">
+  <app-component-loading [loading]="isLoaded" [httploading]="ishttpLoaded"></app-component-loading>
+  <router-outlet></router-outlet>
+  <app-messages></app-messages>
+  <app-todo></app-todo>
+</app-navigation-bar>
+  

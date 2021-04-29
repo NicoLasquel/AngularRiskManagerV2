@@ -1,0 +1,58 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" 
+      fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="false">
+      <!--[opened]="(isHandset$ | async) === false"-->
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <div *ngFor="let link of subLinks">
+        <div *ngIf=link.path>
+          <a mat-list-item href={{link.path}}>{{link.text}}</a>
+        </div>
+        <div *ngIf=!link.path>
+          <mat-toolbar>{{link.text}}</mat-toolbar>
+        </div>
+      </div>
+      
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()">
+        <!--*ngIf="isHandset$ | async"-->
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>{{title}}</span>
+<!--
+      <app-theme 
+      [options]="options$ | async"
+      (themeChange)="themeChangeHandler($event)">
+    </app-theme>
+-->
+      <span class="spacer"></span>
+      <button mat-icon-button routerLink = "/dashboard">
+        <mat-icon>home</mat-icon>
+      </button>
+      <button mat-icon-button routerLink="/notifications">
+        <mat-icon>notifications</mat-icon>
+      </button>
+      <button mat-icon-button routerLink="/account">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+      <button mat-icon-button routerLink="/exit">
+        <mat-icon>exit_to_app</mat-icon>
+      </button>
+
+    </mat-toolbar>
+    
+    <!-- Add Content Here -->
+    <ng-content></ng-content>
+    
+  </mat-sidenav-content>
+</mat-sidenav-container>

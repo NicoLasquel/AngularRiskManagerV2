@@ -1,0 +1,23 @@
+<mat-form-field class="date-field" appearance="outline">
+    <mat-label>{{title}}</mat-label>
+    <mat-date-range-input [rangePicker]="picker">
+        <input
+        matStartDate
+        placeholder="DD/MM/YYYY"
+        [formControl]="startingDate"
+        [disableControl]=!isEditable
+        #MyStartDate
+        >
+        <input
+        matEndDate=endDate
+        placeholder="DD/MM/YYYY"
+        #MyEndDate
+        [formControl]="endingDate"
+        [disableControl]=!isEditable
+        (dateChange)="dateRangeChange(MyStartDate,MyEndDate);">
+    </mat-date-range-input>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker></mat-date-range-picker>
+</mat-form-field>
+
+

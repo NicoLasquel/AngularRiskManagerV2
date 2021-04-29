@@ -1,0 +1,11 @@
+.mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+}
+
+table {
+    width: 100%;
+}
+
+.CrossElement{
+    text-align: center;
+}
